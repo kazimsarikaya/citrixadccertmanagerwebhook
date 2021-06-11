@@ -27,7 +27,7 @@ if [ "x$cmd" == "xbuild" ]; then
   REV=$(git describe --long --tags --match='v*' --dirty 2>/dev/null || git rev-list -n1 HEAD)
   NOW=$(date +'%Y-%m-%d_%T')
   GOV=$(go version)
-  go build -ldflags "${LDFLAGS} -X main.version=$REV -X main.buildTime=$NOW -X 'main.goVersion=${GOV}'"  -o ./bin/sibatuu ./cmd
+  go build -ldflags "${LDFLAGS} -X main.version=$REV -X main.buildTime=$NOW -X 'main.goVersion=${GOV}'"  -o ./bin/${PROJECT} ./cmd
 elif [ "x$cmd" == "xtest" ]; then
   shift
   ./test.sh $@
