@@ -1,0 +1,37 @@
+linters:
+  enable:
+  - asciicheck
+  - bodyclose
+  - depguard
+  - dogsled
+  - dupl
+  - errorlint
+  - exportloopref
+  - gci
+  - gocognit
+  - goconst
+  - gocritic
+  - gocyclo
+  - godot
+  - goerr113
+  - gofmt
+  - gofumpt
+  - goimports
+  - gomodguard
+  - goprintffuncname
+  - gosec
+  - makezero
+  - misspell
+  - nakedret
+  - noctx
+  - nolintlint
+  - predeclared
+  - stylecheck
+  - unconvert
+  - unparam
+  - whitespace
+  - wsl
+
+issues:
+  exclude:
+  - ST1001
