@@ -1,9 +1,6 @@
-#!/bin/sh -x
+#!/bin/sh
 
-CONTAINER_HOST="tcp://127.0.0.1:1928"
-USER=kazimsarikaya
-PROJECT=test
-REPO=github.com/${USER}/${PROJECT}
+REPO=${REPOHOST}/${USER}/${PROJECT}
 
 
 if [[ "x${USER}" == "x" ]]; then
@@ -16,20 +13,22 @@ if [[ "x${PROJECT}" == "x" ]]; then
   exit 1
 fi
 
-if [[ "x${REPO}" == "x" ]]; then
+if [[ "x${REPOHOST}" == "x" ]]; then
   echo set repo
   exit 1
 fi
 
-test "X$(basename -- "$0")" = "X.project.sh" || exit 0
+if test "X$(basename -- "$0")" == "Xproject.sh"; then
 
-cmd=${1:-build}
+  cmd=${1:-build}
 
-if [[ "x${cmd}" == "xinit" ]]; then
-  echo Initializing project
-  mkdir -p bin tmp cmd internal/${PROJECT} pkg/${PROJECT} tmp vendor
-  go mod init ${REPO}
-elif [[ "x${cmd}" == "xdestroy" ]]; then
-  echo Destroying project
-  rm -fr bin tmp cmd internal pkg tmp vendor go.mod go.sum *.test
+  if [[ "x${cmd}" == "xinit" ]]; then
+    echo Initializing project
+    mkdir -p bin tmp cmd internal/${PROJECT} pkg/${PROJECT} tmp vendor
+    go mod init ${REPO}
+  elif [[ "x${cmd}" == "xdestroy" ]]; then
+    echo Destroying project
+    rm -fr bin tmp cmd internal pkg tmp vendor go.mod go.sum *.test
+  fi
+
 fi

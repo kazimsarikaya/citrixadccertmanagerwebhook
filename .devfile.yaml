@@ -11,6 +11,13 @@ components:
   - type: dockerimage
     image: 'docker.io/kazimsarikaya/che-golang-1.16:latest'
     alias: go-cli
+    env:
+      - name: USER
+        value: ""
+      - name: PROJECT
+        value: ""
+      - name: REPOHOST
+        value: ""
     endpoints:
       - name: 8080-tcp
         port: 8080

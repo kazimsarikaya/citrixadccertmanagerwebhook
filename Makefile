@@ -9,7 +9,7 @@ docker:
 	./docker.sh $(filter-out $@,$(MAKECMDGOALS))
 
 project:
-	./.project.sh $(filter-out $@,$(MAKECMDGOALS))
+	./project.sh $(filter-out $@,$(MAKECMDGOALS))
 
 %:
 	@:
