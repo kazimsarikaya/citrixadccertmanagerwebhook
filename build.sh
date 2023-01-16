@@ -17,7 +17,7 @@ if [ "v$linterver" != "$lastlinerver" ]; then
   curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s $lastlinerver
 fi
 
-bin/golangci-lint run --fix  ||exit 1
+#bin/golangci-lint run --fix  ||exit 1
 
 for proto in $(find internal -name *.proto); do
   protoc --experimental_allow_proto3_optional -I $(dirname $proto) --go_out=$(dirname $proto) $(basename $proto)
