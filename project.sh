@@ -1,14 +1,14 @@
 #!/bin/sh
 
-REPO=${REPOHOST}/${USER}/${PROJECT}
+REPO=${REPOHOST}/${REPOUSER}/${REPOPROJECT}
 
 
-if [[ "x${USER}" == "x" ]]; then
+if [[ "x${REPOUSER}" == "x" ]]; then
   echo set user
   exit 1
 fi
 
-if [[ "x${PROJECT}" == "x" ]]; then
+if [[ "x${REPOPROJECT}" == "x" ]]; then
   echo set project
   exit 1
 fi

@@ -17,14 +17,32 @@ limitations under the License.
 package main
 
 import (
+	"fmt"
 	"os"
 
-	dr "github.com/kazimsarikaya/citrixadccertmanagerwebhook/internal/citrixadcdns01resolver" 
 	webhookcmd "github.com/cert-manager/cert-manager/pkg/acme/webhook/cmd"
+	dr "github.com/kazimsarikaya/citrixadccertmanagerwebhook/internal/citrixadcdns01resolver"
 	klog "k8s.io/klog/v2"
 )
 
-var GroupName = os.Getenv("GROUP_NAME")
+var (
+	GroupName = os.Getenv("GROUP_NAME")
+	version   = ""
+	buildTime = ""
+	goVersion = ""
+)
+
+func init() {
+	klog.InitFlags(nil)
+	klog.SetOutput(os.Stdout)
+}
+
+func printVersion() {
+	fmt.Printf("Citrix DNS01 cert manager webhook\n")
+	fmt.Printf("Version: %v\n", version)
+	fmt.Printf("Build Time: %v\n", buildTime)
+	fmt.Printf("%v\n", goVersion)
+}
 
 func main() {
 	if GroupName == "" {
@@ -32,6 +50,8 @@ func main() {
 
 		os.Exit(-1)
 	}
+
+	printVersion()
 
 	// This will register our custom DNS provider with the webhook serving
 	// library, making it available as an API under the provided GroupName.

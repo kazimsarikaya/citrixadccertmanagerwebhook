@@ -17,7 +17,7 @@ if [ "v$linterver" != "$lastlinerver" ]; then
   curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s $lastlinerver
 fi
 
-#bin/golangci-lint run --fix  ||exit 1
+bin/golangci-lint --timeout=10m run --fix  ||exit 1
 
 for proto in $(find internal -name *.proto); do
   protoc --experimental_allow_proto3_optional -I $(dirname $proto) --go_out=$(dirname $proto) $(basename $proto)
@@ -27,7 +27,7 @@ if [ "x$cmd" == "xbuild" ]; then
   REV=$(git describe --long --tags --match='v*' --dirty 2>/dev/null || git rev-list -n1 HEAD)
   NOW=$(date +'%Y-%m-%d_%T')
   GOV=$(go version)
-  go build -ldflags "${LDFLAGS} -X main.version=$REV -X main.buildTime=$NOW -X 'main.goVersion=${GOV}'"  -o ./bin/${PROJECT} ./cmd
+  go build -ldflags "${LDFLAGS} -X main.version=$REV -X main.buildTime=$NOW -X 'main.goVersion=${GOV}'"  -o ./bin/${REPOPROJECT} ./cmd
 elif [ "x$cmd" == "xtest" ]; then
   shift
   ./test.sh $@
